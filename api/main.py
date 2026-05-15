@@ -70,11 +70,9 @@ try:
 except Exception:
     qa = None
 
-
 # Global instances
 iam_instance: Optional[AgenticIAM] = None
 settings_instance: Optional[Settings] = None
-
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -116,7 +114,6 @@ async def lifespan(app: FastAPI):
 
         logger.info("API server shutdown complete")
 
-
 def create_app() -> FastAPI:
     """Create and configure FastAPI application"""
 
@@ -140,7 +137,6 @@ def create_app() -> FastAPI:
     setup_exception_handlers(app)
 
     return app
-
 
 def setup_middleware(app: FastAPI):
     """Configure application middleware"""
@@ -277,7 +273,6 @@ def setup_middleware(app: FastAPI):
                     return JSONResponse(status_code=403, content={"detail": "mTLS required for this endpoint"})
         return await call_next(request)
 
-
 def setup_routers(app: FastAPI):
     """Configure API routers"""
 
@@ -349,12 +344,11 @@ def setup_routers(app: FastAPI):
     if qa is not None:
         app.include_router(
             qa.router,
-            tags=["Q&A System - نظام الأسئلة والأجوبة"]
+            tags=["Q&A System - "]
         )
 
     # Reports and alerts (from legacy api.app)
     _setup_reports_and_alerts_routers(app)
-
 
 def _setup_reports_and_alerts_routers(app: FastAPI):
     """Setup reports and alerts routers (legacy endpoints from api.app)"""
@@ -493,7 +487,6 @@ def _setup_reports_and_alerts_routers(app: FastAPI):
 
     app.include_router(alerts_router)
 
-
 def setup_exception_handlers(app: FastAPI):
     """Configure exception handlers"""
 
@@ -553,7 +546,6 @@ def setup_exception_handlers(app: FastAPI):
             }
         )
 
-
 # Dependency injection
 async def get_iam() -> AgenticIAM:
     """Get IAM instance dependency"""
@@ -564,7 +556,6 @@ async def get_iam() -> AgenticIAM:
         )
     return iam_instance
 
-
 async def get_settings() -> Settings:
     """Get settings instance dependency"""
     if not settings_instance:
@@ -574,10 +565,8 @@ async def get_settings() -> Settings:
         )
     return settings_instance
 
-
 # Create app instance
 app = create_app()
-
 
 # Root endpoint
 @app.get("/")
@@ -591,7 +580,6 @@ async def root():
         "redoc": "/redoc",
         "health": "/health"
     }
-
 
 # API info endpoint
 @app.get("/api/v1")
@@ -614,7 +602,6 @@ async def api_info():
         }
     }
 
-
 # Mount GraphQL endpoint (lazy load to avoid circular imports)
 def mount_graphql():
     try:
@@ -624,13 +611,11 @@ def mount_graphql():
     except Exception as e:
         print(f"GraphQL mount skipped: {e}")
 
-
 # Try mounting after app creation
 try:
     mount_graphql()
 except Exception:
     pass
-
 
 if __name__ == "__main__":
     # Development server

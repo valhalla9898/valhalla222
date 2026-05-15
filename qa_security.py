@@ -1,5 +1,5 @@
 """
-نظام الأمان والحماية المتقدم للـ Q&A System
+     Q&A System
 Advanced Security & Protection System
 """
 
@@ -12,9 +12,8 @@ import sqlite3
 import json
 import tempfile
 
-
 class QASecurityManager:
-    """مدير الأمان والحماية للـ Q&A System"""
+    """    Q&A System"""
     
     def __init__(self, db_path: str = "qa_security.db"):
         if db_path == ":memory:":
@@ -361,7 +360,6 @@ class QASecurityManager:
         except Exception as e:
             conn.close()
             return {"error": str(e)}
-
 
 # Singleton instance
 _security_manager = None

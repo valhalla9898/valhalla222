@@ -1,6 +1,6 @@
 """
-Streamlit Dashboard للـ Q&A System
-واجهة أمامية رائعة بـ 3000+ سؤال بالعربية المصرية
+Streamlit Dashboard  Q&A System
+    3000+   
 """
 
 import streamlit as st
@@ -12,7 +12,7 @@ from qa_database import QADatabase, CATEGORIES
 
 # Page configuration
 st.set_page_config(
-    page_title="نظام الأسئلة والأجوبة 🎓",
+    page_title="   🎓",
     page_icon="🧠",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -84,47 +84,46 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Main title
-st.markdown("<h1 class='main-title'>🎓 نظام الأسئلة والأجوبة 🎓</h1>", unsafe_allow_html=True)
+st.markdown("<h1 class='main-title'>🎓    🎓</h1>", unsafe_allow_html=True)
 st.markdown("---")
 
 # Sidebar
 with st.sidebar:
-    st.title("القائمة الرئيسية")
+    st.title(" ")
     page = st.radio(
-        "اختار الصفحة:",
-        ["🏠 الرئيسية", "❓ الأسئلة", "📊 الإحصائيات", "🏆 اللاعبين", "🔍 البحث"]
+        " :",
+        ["🏠 ", "❓ ", "📊 ", "🏆 ", "🔍 "]
     )
     
     st.markdown("---")
-    st.info(f"🆔 معرف المستخدم: {st.session_state.user_id}")
+    st.info(f"🆔  : {st.session_state.user_id}")
     
     # System info
     total_q = st.session_state.qa_db.get_total_questions()
-    st.success(f"📚 عدد الأسئلة: {total_q}")
-
+    st.success(f"📚  : {total_q}")
 
 # ============= HOME PAGE =============
-if page == "🏠 الرئيسية":
+if page == "🏠 ":
     col1, col2, col3 = st.columns(3)
     
     with col1:
-        st.markdown('<div class="stats-card"><h3>عدد الأسئلة</h3><h1>3000+</h1></div>', unsafe_allow_html=True)
+        st.markdown('<div class="stats-card"><h3> </h3><h1>3000+</h1></div>', unsafe_allow_html=True)
     
     with col2:
         stats = st.session_state.qa_db.get_user_stats(st.session_state.user_id)
         if stats:
-            st.markdown(f'<div class="stats-card"><h3>نقاطك</h3><h1>{stats["points"]}</h1></div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="stats-card"><h3></h3><h1>{stats["points"]}</h1></div>', unsafe_allow_html=True)
         else:
-            st.markdown('<div class="stats-card"><h3>نقاطك</h3><h1>0</h1></div>', unsafe_allow_html=True)
+            st.markdown('<div class="stats-card"><h3></h3><h1>0</h1></div>', unsafe_allow_html=True)
     
     with col3:
         categories = st.session_state.qa_db.get_categories()
-        st.markdown(f'<div class="stats-card"><h3>الفئات</h3><h1>{len(categories)}</h1></div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="stats-card"><h3></h3><h1>{len(categories)}</h1></div>', unsafe_allow_html=True)
     
     st.markdown("---")
     
     # Categories overview
-    st.subheader("📂 فئات الأسئلة")
+    st.subheader("📂  ")
     
     categories = st.session_state.qa_db.get_categories()
     
@@ -136,45 +135,44 @@ if page == "🏠 الرئيسية":
                 st.metric(
                     label=cat['arabic_name'],
                     value=cat['count'],
-                    delta="أسئلة"
+                    delta=""
                 )
     
     st.markdown("---")
     
     # Features
-    st.subheader("✨ المميزات")
+    st.subheader("✨ ")
     
     features = [
-        "✅ 3000+ سؤال بالعربية المصرية",
-        "✅ تصنيفات متعددة (أمان، AI، تكنولوجيا، إدارة، عام)",
-        "✅ نظام تقييم وتصنيف الاعبين",
-        "✅ إحصائيات وتقارير شاملة",
-        "✅ بحث سريع وفعال",
-        "✅ واجهة سهلة وجميلة",
-        "✅ نظام مستويات وإنجازات",
-        "✅ حماية وأمان عالي"
+        "✅ 3000+   ",
+        "✅   ( AI   )",
+        "✅    ",
+        "✅   ",
+        "✅   ",
+        "✅   ",
+        "✅   ",
+        "✅   "
     ]
     
     for feature in features:
         st.write(feature)
 
-
 # ============= QUESTIONS PAGE =============
-elif page == "❓ الأسئلة":
-    st.subheader("حل الأسئلة")
+elif page == "❓ ":
+    st.subheader(" ")
     
     col1, col2 = st.columns([3, 1])
     
     with col2:
         selected_category = st.selectbox(
-            "اختار الفئة:",
-            ["عشوائي"] + list(CATEGORIES.keys()),
-            format_func=lambda x: "عشوائي" if x == "عشوائي" else CATEGORIES[x]
+            " :",
+            [""] + list(CATEGORIES.keys()),
+            format_func=lambda x: "" if x == "" else CATEGORIES[x]
         )
     
     with col1:
-        if st.button("📝 سؤال جديد", use_container_width=True):
-            category = None if selected_category == "عشوائي" else selected_category
+        if st.button("📝  ", use_container_width=True):
+            category = None if selected_category == "" else selected_category
             st.session_state.current_question = st.session_state.qa_db.get_random_question(category=category)
             st.session_state.start_time = time.time()
     
@@ -184,28 +182,28 @@ elif page == "❓ الأسئلة":
         q = st.session_state.current_question
         
         # Display question
-        st.markdown(f'<div class="question-box"><h2>❓ السؤال:</h2><h3>{q["question"]}</h3></div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="question-box"><h2>❓ :</h2><h3>{q["question"]}</h3></div>', unsafe_allow_html=True)
         
         # Display category and difficulty
         col1, col2 = st.columns(2)
         with col1:
-            st.badge(f"الفئة: {CATEGORIES.get(q['category'], q['category'])}")
+            st.badge(f": {CATEGORIES.get(q['category'], q['category'])}")
         with col2:
-            difficulty_text = "سهل 🟢" if q['difficulty'] == 1 else "متوسط 🟡" if q['difficulty'] == 2 else "صعب 🔴"
-            st.badge(f"المستوى: {difficulty_text}")
+            difficulty_text = " 🟢" if q['difficulty'] == 1 else " 🟡" if q['difficulty'] == 2 else " 🔴"
+            st.badge(f": {difficulty_text}")
         
         st.markdown("---")
         
         # Answer input
-        st.subheader("إجابتك:")
-        user_answer = st.text_area("اكتب إجابتك هنا:", height=100, placeholder="اكتب إجابتك بشكل واضح...")
+        st.subheader(":")
+        user_answer = st.text_area("  :", height=100, placeholder="   ...")
         
         col1, col2 = st.columns(2)
         
         with col1:
-            if st.button("✅ تحقق من الإجابة", use_container_width=True):
+            if st.button("✅   ", use_container_width=True):
                 if not user_answer.strip():
-                    st.error("الرجاء إدخال إجابة!")
+                    st.error("  !")
                 else:
                     time_taken = int(time.time() - st.session_state.start_time) if st.session_state.start_time else 0
                     
@@ -232,29 +230,28 @@ elif page == "❓ الأسئلة":
                     
                     # Display result
                     if is_correct:
-                        st.success(f"✅ صحيح! كسبت {points} نقاط")
+                        st.success(f"✅ !  {points} ")
                     else:
-                        st.error(f"❌ خاطئ. النقاط: {points}")
+                        st.error(f"❌ . : {points}")
                     
-                    st.markdown(f'<div class="answer-box"><h4>✓ الإجابة الصحيحة:</h4><p>{q["answer"]}</p></div>', unsafe_allow_html=True)
+                    st.markdown(f'<div class="answer-box"><h4>✓  :</h4><p>{q["answer"]}</p></div>', unsafe_allow_html=True)
                     
                     if time_taken > 0:
-                        st.info(f"⏱️ الوقت المستغرق: {time_taken} ثانية")
+                        st.info(f"⏱️  : {time_taken} ")
         
         with col2:
-            if st.button("⏭️ السؤال التالي", use_container_width=True):
-                category = None if selected_category == "عشوائي" else selected_category
+            if st.button("⏭️  ", use_container_width=True):
+                category = None if selected_category == "" else selected_category
                 st.session_state.current_question = st.session_state.qa_db.get_random_question(category=category)
                 st.session_state.start_time = time.time()
                 st.rerun()
     
     else:
-        st.info("اضغط على زر 'سؤال جديد' عشان تبدأ!")
-
+        st.info("   ' '  !")
 
 # ============= STATISTICS PAGE =============
-elif page == "📊 الإحصائيات":
-    st.subheader("إحصائياتك الشخصية")
+elif page == "📊 ":
+    st.subheader(" ")
     
     stats = st.session_state.qa_db.get_user_stats(st.session_state.user_id)
     
@@ -262,49 +259,48 @@ elif page == "📊 الإحصائيات":
         col1, col2, col3, col4 = st.columns(4)
         
         with col1:
-            st.metric("المستوى", f"Level {stats['level']}", "🎯")
+            st.metric("", f"Level {stats['level']}", "🎯")
         
         with col2:
-            st.metric("النقاط", stats['points'], "⭐")
+            st.metric("", stats['points'], "⭐")
         
         with col3:
-            st.metric("عدد الأسئلة", stats['total_questions'], "❓")
+            st.metric(" ", stats['total_questions'], "❓")
         
         with col4:
-            st.metric("الدقة", f"{stats['accuracy']:.1f}%", "🎯")
+            st.metric("", f"{stats['accuracy']:.1f}%", "🎯")
         
         st.markdown("---")
         
         # Progress chart
-        st.subheader("📈 تقدمك")
+        st.subheader("📈 ")
         
         if stats['total_questions'] > 0:
             progress_data = {
-                "الحالة": ["صحيح", "خاطئ"],
-                "العدد": [stats['correct_answers'], stats['total_questions'] - stats['correct_answers']]
+                "": ["", ""],
+                "": [stats['correct_answers'], stats['total_questions'] - stats['correct_answers']]
             }
             
             df = pd.DataFrame(progress_data)
-            st.bar_chart(df.set_index('الحالة'))
+            st.bar_chart(df.set_index(''))
         
         st.markdown("---")
         
         # Category performance
-        st.subheader("📊 أداؤك في كل فئة")
+        st.subheader("📊    ")
         
         categories = st.session_state.qa_db.get_categories()
         
         for cat in categories:
-            with st.expander(f"📌 {cat['arabic_name']} ({cat['count']} أسئلة)"):
-                st.write(f"عدد الأسئلة: {cat['count']}")
+            with st.expander(f"📌 {cat['arabic_name']} ({cat['count']} )"):
+                st.write(f" : {cat['count']}")
     
     else:
-        st.info("لم تحل أي أسئلة بعد! ابدأ الآن من صفحة الأسئلة 🚀")
-
+        st.info("    !      🚀")
 
 # ============= LEADERBOARD PAGE =============
-elif page == "🏆 اللاعبين":
-    st.subheader("🏆 أفضل اللاعبين")
+elif page == "🏆 ":
+    st.subheader("🏆  ")
     
     leaderboard = st.session_state.qa_db.get_leaderboard(limit=50)
     
@@ -312,10 +308,10 @@ elif page == "🏆 اللاعبين":
         # Create DataFrame
         df = pd.DataFrame([
             {
-                "الترتيب": entry['rank'],
-                "المستخدم": entry['user_id'],
-                "النقاط": entry['points'],
-                "الدقة": f"{entry['accuracy']:.1f}%"
+                "": entry['rank'],
+                "": entry['user_id'],
+                "": entry['points'],
+                "": f"{entry['accuracy']:.1f}%"
             }
             for entry in leaderboard
         ])
@@ -324,7 +320,7 @@ elif page == "🏆 اللاعبين":
         
         # Check user's position
         st.markdown("---")
-        st.subheader("📍 موضعك في الترتيب")
+        st.subheader("📍   ")
         
         user_position = next(
             (idx + 1 for idx, entry in enumerate(leaderboard) if entry['user_id'] == st.session_state.user_id),
@@ -332,53 +328,51 @@ elif page == "🏆 اللاعبين":
         )
         
         if user_position:
-            st.success(f"أنت في المركز #{user_position} 🎉")
+            st.success(f"   #{user_position} 🎉")
         else:
-            st.info("انضم إلى لعبة الأسئلة لتظهر في الترتيب!")
+            st.info("      !")
     
     else:
-        st.info("لا يوجد بيانات للاعبين حتى الآن!")
-
+        st.info("     !")
 
 # ============= SEARCH PAGE =============
-elif page == "🔍 البحث":
-    st.subheader("🔍 ابحث عن الأسئلة")
+elif page == "🔍 ":
+    st.subheader("🔍   ")
     
-    search_keyword = st.text_input("اكتب كلمة للبحث:")
+    search_keyword = st.text_input("  :")
     
     search_category = st.selectbox(
-        "اختار الفئة (اختياري):",
-        ["الكل"] + list(CATEGORIES.keys()),
-        format_func=lambda x: "الكل" if x == "الكل" else CATEGORIES[x]
+        "  ():",
+        [""] + list(CATEGORIES.keys()),
+        format_func=lambda x: "" if x == "" else CATEGORIES[x]
     )
     
-    if st.button("🔎 بحث", use_container_width=True):
+    if st.button("🔎 ", use_container_width=True):
         if search_keyword:
-            category = None if search_category == "الكل" else search_category
+            category = None if search_category == "" else search_category
             results = st.session_state.qa_db.search_questions(search_keyword, category=category)
             
-            st.markdown(f"### النتائج: {len(results)} سؤال")
+            st.markdown(f"### : {len(results)} ")
             st.markdown("---")
             
             if results:
                 for idx, result in enumerate(results, 1):
-                    with st.expander(f"❓ السؤال {idx}: {result['question'][:50]}..."):
-                        st.write(f"**السؤال:** {result['question']}")
-                        st.write(f"**الفئة:** {CATEGORIES.get(result['category'], result['category'])}")
-                        st.write(f"**الإجابة:** {result['answer']}")
-                        difficulty_text = "سهل 🟢" if result['difficulty'] == 1 else "متوسط 🟡" if result['difficulty'] == 2 else "صعب 🔴"
-                        st.write(f"**المستوى:** {difficulty_text}")
+                    with st.expander(f"❓  {idx}: {result['question'][:50]}..."):
+                        st.write(f"**:** {result['question']}")
+                        st.write(f"**:** {CATEGORIES.get(result['category'], result['category'])}")
+                        st.write(f"**:** {result['answer']}")
+                        difficulty_text = " 🟢" if result['difficulty'] == 1 else " 🟡" if result['difficulty'] == 2 else " 🔴"
+                        st.write(f"**:** {difficulty_text}")
             else:
-                st.warning("لم نجد أسئلة مطابقة!")
+                st.warning("   !")
         else:
-            st.warning("الرجاء إدخال كلمة للبحث عنها!")
-
+            st.warning("    !")
 
 # Footer
 st.markdown("---")
 st.markdown("""
 <div style="text-align: center; color: #666;">
-    <p>🧠 نظام الأسئلة والأجوبة v1.0 | 3000+ سؤال بالعربية المصرية</p>
+    <p>🧠    v1.0 | 3000+   </p>
     <p>👨‍💻 Made with ❤️ for Learning</p>
 </div>
 """, unsafe_allow_html=True)

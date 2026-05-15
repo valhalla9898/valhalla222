@@ -1,5 +1,5 @@
 """
-نظام التحليلات والإحصائيات المتقدم للـ Q&A System
+     Q&A System
 Advanced Analytics & Statistics System
 """
 
@@ -11,9 +11,8 @@ import json
 import statistics as stats
 import tempfile
 
-
 class QAAnalytics:
-    """نظام التحليلات المتقدم"""
+    """  """
     
     def __init__(self, db_path: str = "qa_analytics.db"):
         if db_path == ":memory:":
@@ -490,7 +489,6 @@ class QAAnalytics:
         except Exception as e:
             conn.close()
             return {"error": str(e)}
-
 
 # Singleton instance
 _analytics = None

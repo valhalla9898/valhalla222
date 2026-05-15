@@ -1,5 +1,5 @@
 """
-نظام المساعدات والأدوات المتقدمة
+   
 Advanced Utilities & Helper Functions for QA System
 """
 
@@ -10,27 +10,24 @@ from typing import Dict, List, Optional, Tuple
 from enum import Enum
 import hashlib
 
-
 class QuestionDifficulty(str, Enum):
-    """مستويات الصعوبة"""
-    BEGINNER = "مبتدي"
-    INTERMEDIATE = "متوسط"
-    ADVANCED = "متقدم"
-    EXPERT = "خبير"
-
+    """ """
+    BEGINNER = ""
+    INTERMEDIATE = ""
+    ADVANCED = ""
+    EXPERT = ""
 
 class QuestionCategory(str, Enum):
-    """فئات الأسئلة"""
-    SECURITY = "أمان"
-    AI = "ذكاء اصطناعي"
-    PROGRAMMING = "برمجة"
-    NETWORKS = "شبكات"
-    DATABASES = "قواعد بيانات"
-    MANAGEMENT = "إدارة"
-
+    """ """
+    SECURITY = ""
+    AI = " "
+    PROGRAMMING = ""
+    NETWORKS = ""
+    DATABASES = " "
+    MANAGEMENT = ""
 
 class QAUtilities:
-    """فئة المساعدات والأدوات"""
+    """  """
     
     @staticmethod
     def calculate_difficulty_score(
@@ -60,12 +57,12 @@ class QAUtilities:
         
         # Category-based default
         category_difficulty = {
-            "أمان": 3,
-            "ذكاء اصطناعي": 4,
-            "برمجة": 3,
-            "شبكات": 2,
-            "قواعد بيانات": 3,
-            "إدارة": 2
+            "": 3,
+            " ": 4,
+            "": 3,
+            "": 2,
+            " ": 3,
+            "": 2
         }
         
         base_score = category_difficulty.get(category, 2)
@@ -80,7 +77,7 @@ class QAUtilities:
         """
         # Remove common words
         stopwords = {
-            'في', 'من', 'إلى', 'على', 'هو', 'هي', 'أن', 'أو', 'و', 'ل', 'ب',
+            '', '', '', '', '', '', '', '', '', '', '',
             'the', 'is', 'a', 'an', 'and', 'or', 'of', 'to', 'in', 'for'
         }
         
@@ -118,19 +115,19 @@ class QAUtilities:
         Categorize user performance based on accuracy
         """
         if accuracy >= 90:
-            return "متفوق"
+            return ""
         elif accuracy >= 80:
-            return "ممتاز"
+            return ""
         elif accuracy >= 70:
-            return "جيد جداً"
+            return " "
         elif accuracy >= 60:
-            return "جيد"
+            return ""
         elif accuracy >= 50:
-            return "متوسط"
+            return ""
         elif accuracy >= 30:
-            return "ضعيف"
+            return ""
         else:
-            return "ضعيف جداً"
+            return " "
     
     @staticmethod
     def calculate_experience_points(
@@ -190,24 +187,24 @@ class QAUtilities:
         
         # Generate recommendations based on performance
         if accuracy < 40:
-            summary["recommendations"].append("ركز أكتر على المحاضرات التأسيسية")
-            summary["recommendations"].append("حل أسئلة المستوى المبتدي أولاً")
-            summary["recommendations"].append("استخدم المراجع والموارد التعليمية")
+            summary["recommendations"].append("    ")
+            summary["recommendations"].append("    ")
+            summary["recommendations"].append("   ")
         
         elif accuracy < 60:
-            summary["recommendations"].append("الأساس بتاعك محتاج تقويه شوية")
-            summary["recommendations"].append("ركز على الفهم قبل الحفظ")
-            summary["recommendations"].append("حل أسئلة متنوعة من نفس الموضوع")
+            summary["recommendations"].append("    ")
+            summary["recommendations"].append("    ")
+            summary["recommendations"].append("     ")
         
         elif accuracy < 80:
-            summary["recommendations"].append("أنت على الطريق الصحيح!")
-            summary["recommendations"].append("حاول حل أسئلة أصعب شوية")
-            summary["recommendations"].append("راجع النقاط اللي فيها تردد")
+            summary["recommendations"].append("   !")
+            summary["recommendations"].append("    ")
+            summary["recommendations"].append("    ")
         
         else:
-            summary["recommendations"].append("ممتاز جداً! استمر بنفس الزخم")
-            summary["recommendations"].append("حاول تساعد غيرك في الفهم")
-            summary["recommendations"].append("انتقل للمستويات الأعلى")
+            summary["recommendations"].append(" !   ")
+            summary["recommendations"].append("    ")
+            summary["recommendations"].append("  ")
         
         return summary
     
@@ -225,15 +222,15 @@ class QAUtilities:
         )
         
         if mastery_percentage >= 90:
-            level = "متقن تماماً"
+            level = " "
         elif mastery_percentage >= 75:
-            level = "متقن جيداً"
+            level = " "
         elif mastery_percentage >= 60:
-            level = "متقن"
+            level = ""
         elif mastery_percentage >= 40:
-            level = "مبتدي"
+            level = ""
         else:
-            level = "جديد في المجال"
+            level = "  "
         
         return {
             "category": category_stats.get("category"),
@@ -250,32 +247,32 @@ class QAUtilities:
         """
         messages = {
             "excellent": [
-                "أنت نجم! ⭐",
-                "معقول كده!!! 🔥",
-                "براافو أنت سامع! 👏",
-                "ده الأداء الحقيقي! 💪",
-                "ممتاز جداً! 🎉"
+                " ! ⭐",
+                " !!! 🔥",
+                "  ! 👏",
+                "  ! 💪",
+                " ! 🎉"
             ],
             "good": [
-                "تمام التمام! 👍",
-                "أحسنت! 😊",
-                "في الطريق الصح 🛣️",
-                "استمر كده! 💯",
-                "جهدك عم يدي ثمره 🌟"
+                " ! 👍",
+                "! 😊",
+                "   🛣️",
+                " ! 💯",
+                "    🌟"
             ],
             "fair": [
-                "حاول أكتر شوية",
-                "لسه فيك خير 💪",
-                "ركز أكتر في التفاصيل",
-                "لازم تراجع المادة",
-                "حاول تفهم أكتر"
+                "  ",
+                "   💪",
+                "   ",
+                "  ",
+                "  "
             ],
             "poor": [
-                "ما تستسلم! 💪",
-                "الأول مرة تحس إنك خايب 😌",
-                "راجع الدرس من الأول",
-                "ركز على الأساسيات",
-                "فيك قوة! 💥"
+                " ! 💪",
+                "     😌",
+                "   ",
+                "  ",
+                " ! 💥"
             ]
         }
         
@@ -303,16 +300,16 @@ class QAUtilities:
             diff = now - dt
             
             if diff.total_seconds() < 60:
-                return "الآن"
+                return ""
             elif diff.total_seconds() < 3600:
                 minutes = int(diff.total_seconds() / 60)
-                return f"قبل {minutes} دقيقة"
+                return f" {minutes} "
             elif diff.total_seconds() < 86400:
                 hours = int(diff.total_seconds() / 3600)
-                return f"قبل {hours} ساعة"
+                return f" {hours} "
             elif diff.total_seconds() < 2592000:
                 days = diff.days
-                return f"قبل {days} يوم"
+                return f" {days} "
             else:
                 return dt.strftime("%d/%m/%Y")
         except:
@@ -328,27 +325,26 @@ class QAUtilities:
         
         # Check question text
         if not question.get("question") or len(question["question"]) < 10:
-            issues.append("النص قصير جداً")
+            issues.append("  ")
         
         # Check answers
         if not question.get("answer") or len(question["answer"]) < 3:
-            issues.append("الإجابة قصيرة جداً أو غير موجودة")
+            issues.append("     ")
         
         # Check category
         valid_categories = [c.value for c in QuestionCategory]
         if question.get("category") not in valid_categories:
-            issues.append(f"الفئة غير صحيحة")
+            issues.append(f"  ")
         
         # Check difficulty
         if question.get("difficulty") not in [1, 2, 3, 4, 5]:
-            issues.append("درجة الصعوبة غير صحيحة")
+            issues.append("   ")
         
         return len(issues) == 0, issues
 
-
 # Performance metrics calculator
 class PerformanceMetrics:
-    """حاسبة مقاييس الأداء"""
+    """  """
     
     @staticmethod
     def calculate_learning_velocity(user_stats: Dict, days: int = 7) -> float:

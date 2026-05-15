@@ -1,5 +1,5 @@
 """
-نظام التوصيات والتعلم الذكي
+   
 Intelligent Recommendation & Smart Learning System
 """
 
@@ -11,17 +11,15 @@ import json
 import math
 import tempfile
 
-
 class DifficultyLevel(str, Enum):
-    """مستويات الصعوبة"""
-    BEGINNER = "مبتدي"
-    INTERMEDIATE = "متوسط"
-    ADVANCED = "متقدم"
-    EXPERT = "خبير"
-
+    """ """
+    BEGINNER = ""
+    INTERMEDIATE = ""
+    ADVANCED = ""
+    EXPERT = ""
 
 class QARecommendationEngine:
-    """محرك التوصيات الذكي"""
+    """  """
     
     def __init__(self, db_path: str = "qa_recommendations.db"):
         if db_path == ":memory:" or db_path.startswith(":memory"):
@@ -221,22 +219,22 @@ class QARecommendationEngine:
         
         # Difficulty progression
         user_accuracy = user_stats.get("overall_accuracy", 50)
-        question_difficulty = question.get("difficulty_level", "متوسط")
+        question_difficulty = question.get("difficulty_level", "")
         
         if user_accuracy < 30:
-            if question_difficulty == "مبتدي":
+            if question_difficulty == "":
                 score += 25
                 reasons.append("Perfect difficulty for your current level")
         elif user_accuracy < 50:
-            if question_difficulty in ["مبتدي", "متوسط"]:
+            if question_difficulty in ["", ""]:
                 score += 25
                 reasons.append("Appropriate challenge level")
         elif user_accuracy < 70:
-            if question_difficulty in ["متوسط", "متقدم"]:
+            if question_difficulty in ["", ""]:
                 score += 25
                 reasons.append("Good progressive challenge")
         else:
-            if question_difficulty in ["متقدم", "خبير"]:
+            if question_difficulty in ["", ""]:
                 score += 25
                 reasons.append("Expert-level content for mastery")
         
@@ -489,7 +487,6 @@ class QARecommendationEngine:
         except Exception:
             conn.close()
             return {}
-
 
 # Singleton instance
 _recommendation_engine = None

@@ -1,6 +1,6 @@
 """
 Comprehensive Tests for Advanced QA System
-اختبارات شاملة لنظام الأسئلة والأجوبة المتقدم
+     
 """
 
 import pytest
@@ -15,7 +15,6 @@ from qa_security import QASecurityManager, get_security_manager
 from qa_analytics import QAAnalytics, get_analytics
 from qa_recommendations import QARecommendationEngine, get_recommendation_engine
 from qa_utilities import QAUtilities, PerformanceMetrics
-
 
 class TestQADatabase:
     """Test QA Database functionality"""
@@ -34,7 +33,7 @@ class TestQADatabase:
         assert len(categories) > 0, "Should have categories"
         
         category_names = [c.get('category') for c in categories]
-        assert 'أمان' in category_names or 'security' in str(category_names).lower()
+        assert '' in category_names or 'security' in str(category_names).lower()
     
     def test_get_random_question(self):
         """Test getting random question"""
@@ -51,7 +50,6 @@ class TestQADatabase:
         question = db.get_question_by_id(1)
         assert question is not None
         assert question['id'] == 1
-
 
 class TestQASecurity:
     """Test Security Manager functionality"""
@@ -112,7 +110,7 @@ class TestQASecurity:
     
     def test_answer_hashing(self):
         """Test answer hashing and verification"""
-        answer = "الإجابة الصحيحة"
+        answer = " "
         
         hashed, salt = QASecurityManager.hash_answer(answer)
         assert hashed != answer, "Hash should differ from original"
@@ -122,9 +120,8 @@ class TestQASecurity:
         assert is_correct, "Correct answer should verify"
         
         # Verify wrong answer
-        is_wrong = QASecurityManager.verify_answer("إجابة خاطئة", hashed, salt)
+        is_wrong = QASecurityManager.verify_answer(" ", hashed, salt)
         assert not is_wrong, "Wrong answer should not verify"
-
 
 class TestQAAnalytics:
     """Test Analytics Engine functionality"""
@@ -157,8 +154,8 @@ class TestQAAnalytics:
         success = analytics.record_quiz_session(
             user_id=user_id,
             session_id=session_id,
-            category="أمان",
-            difficulty_level="متقدم",
+            category="",
+            difficulty_level="",
             questions_count=10,
             correct_answers=8,
             time_spent=300
@@ -195,8 +192,8 @@ class TestQAAnalytics:
             analytics.record_quiz_session(
                 user_id=user_id,
                 session_id=session_id,
-                category="برمجة",
-                difficulty_level="متوسط",
+                category="",
+                difficulty_level="",
                 questions_count=10,
                 correct_answers=8 - user_num,
                 time_spent=300
@@ -204,7 +201,6 @@ class TestQAAnalytics:
         
         leaderboard = analytics.get_leaderboard(limit=5)
         assert len(leaderboard) > 0, "Should have leaderboard entries"
-
 
 class TestQARecommendations:
     """Test Recommendation Engine functionality"""
@@ -221,14 +217,14 @@ class TestQARecommendations:
         
         success = engine.create_user_profile(
             user_id=user_id,
-            preferred_category="برمجة",
-            preferred_difficulty="متقدم"
+            preferred_category="",
+            preferred_difficulty=""
         )
         assert success, "Should create user profile"
         
         profile = engine.get_user_profile(user_id)
         assert profile is not None
-        assert profile['preferred_category'] == "برمجة"
+        assert profile['preferred_category'] == ""
     
     def test_spaced_repetition_update(self):
         """Test spaced repetition algorithm"""
@@ -248,7 +244,6 @@ class TestQARecommendations:
         reviews = engine.get_next_review_questions(user_id, limit=5)
         # Note: May not appear immediately due to scheduling
 
-
 class TestQAUtilities:
     """Test Utility Functions"""
     
@@ -257,20 +252,20 @@ class TestQAUtilities:
         score = QAUtilities.calculate_difficulty_score(
             question_text="This is a simple question?" * 3,
             answer_text="Simple answer",
-            category="برمجة"
+            category=""
         )
         assert 1 <= score <= 5, "Score should be between 1 and 5"
     
     def test_keyword_extraction(self):
         """Test keyword extraction"""
-        text = "هذا نص يحتوي على كلمات مهمة جداً وعبارات متعددة"
+        text = "        "
         keywords = QAUtilities.extract_keywords(text, limit=5)
         assert len(keywords) > 0, "Should extract keywords"
     
     def test_answer_similarity(self):
         """Test answer similarity calculation"""
-        answer1 = "التشفير RSA هو نظام تشفير غير متماثل"
-        answer2 = "RSA هو نظام تشفير غير متماثل"
+        answer1 = " RSA     "
+        answer2 = "RSA     "
         
         similarity = QAUtilities.calculate_answer_similarity(answer1, answer2)
         assert 0 <= similarity <= 1, "Similarity should be between 0 and 1"
@@ -278,10 +273,10 @@ class TestQAUtilities:
     
     def test_performance_categorization(self):
         """Test performance level categorization"""
-        assert QAUtilities.categorize_performance(95) == "متفوق"
-        assert QAUtilities.categorize_performance(75) == "جيد جداً"
-        assert QAUtilities.categorize_performance(50) == "متوسط"
-        assert QAUtilities.categorize_performance(20) == "ضعيف جداً"
+        assert QAUtilities.categorize_performance(95) == ""
+        assert QAUtilities.categorize_performance(75) == " "
+        assert QAUtilities.categorize_performance(50) == ""
+        assert QAUtilities.categorize_performance(20) == " "
     
     def test_experience_points(self):
         """Test experience point calculation"""
@@ -302,9 +297,8 @@ class TestQAUtilities:
         }
         
         summary = QAUtilities.generate_learning_summary(user_stats)
-        assert summary['performance_level'] == "جيد جداً"
+        assert summary['performance_level'] == " "
         assert len(summary['recommendations']) > 0
-
 
 class TestPerformanceMetrics:
     """Test Performance Metrics calculation"""
@@ -326,7 +320,6 @@ class TestPerformanceMetrics:
             questions_per_day=5.0
         )
         assert result['already_mastered'] == True
-
 
 class TestIntegration:
     """Integration tests for all components"""
@@ -370,14 +363,12 @@ class TestIntegration:
         
         print("✅ Integration test passed!")
 
-
 @pytest.mark.asyncio
 async def test_async_operations():
     """Test async operations"""
     # This would test async API endpoints
     # Placeholder for future async tests
     assert True
-
 
 # Pytest configuration
 if __name__ == "__main__":

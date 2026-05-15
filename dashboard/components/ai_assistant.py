@@ -3,7 +3,6 @@ import os
 from . import ai_kb
 from utils.faq_engine import get_faq_engine
 
-
 def _call_openai(prompt: str, model: str = "gpt-3.5-turbo") -> str:
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
@@ -29,7 +28,6 @@ def _call_openai(prompt: str, model: str = "gpt-3.5-turbo") -> str:
             f"OpenAI cloud request failed for model '{model}': {exc}\n\n"
             f"Falling back to the local assistant.\n\n{fallback}"
         )
-
 
 def _local_helper(prompt: str) -> str:
     # Minimal offline assistant: keyword-based help
@@ -126,10 +124,10 @@ def _local_helper(prompt: str) -> str:
                 "1. Admin → User Management\n"
                 "2. Click 'Create User'\n"
                 "3. Enter details:\n"
-                "   - Username (unique)\n"
-                "   - Email\n"
-                "   - Password\n"
-                "   - Role\n"
+                " - Username (unique)\n"
+                " - Email\n"
+                " - Password\n"
+                " - Role\n"
                 "4. Click 'Create'\n\n"
                 "**Edit User:**\n"
                 "1. Find user in list\n"
@@ -249,7 +247,6 @@ def _local_helper(prompt: str) -> str:
             "Or describe what you need help with!"
         )
 
-
 def show_ai_assistant():
     st.header("🤖 AI Assistant - Smart Q&A Engine")
     st.write("🚀 Ask any question about Agentic-IAM (Arabic or English, typos OK!) and get multiple answer options to choose from.")
@@ -269,8 +266,8 @@ def show_ai_assistant():
         col1, col2 = st.columns([4, 1])
         with col1:
             user_question = st.text_input(
-                "Type your question (English or العربية, spelling errors are OK!)",
-                placeholder="E.g., 'كيف أنشئ مستخدم جديد?' or 'How do I register an agent?'"
+                "Type your question (English or , spelling errors are OK!)",
+                placeholder="E.g., '   ?' or 'How do I register an agent?'"
             )
         
         with col2:
@@ -371,7 +368,7 @@ def show_ai_assistant():
                         for item in questions[:10]:  # Show first 10
                             st.markdown(f"**Q:** {item.get('question_en', '')}")
                             if item.get('question_ar'):
-                                st.caption(f"(عربي: {item['question_ar']})")
+                                st.caption(f"(: {item['question_ar']})")
                             
                             answers = item.get('answers', [])
                             if answers:

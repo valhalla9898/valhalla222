@@ -1,6 +1,6 @@
 """
-API Router لـ Questions & Answers System
-بتشتغل مع قاعدة بيانات الأسئلة والأجوبة مع الأمان والتحليلات والتوصيات
+API Router  Questions & Answers System
+         
 Advanced Q&A System with Security, Analytics & Recommendations
 """
 
@@ -29,7 +29,6 @@ router = APIRouter(
     responses={404: {"description": "Not found"}}
 )
 
-
 # ============= Security Dependencies =============
 
 async def verify_user(user_id: str = Header(None, alias="X-User-ID")) -> str:
@@ -42,7 +41,6 @@ async def verify_user(user_id: str = Header(None, alias="X-User-ID")) -> str:
         raise HTTPException(status_code=403, detail="User is blacklisted")
     
     return user_id
-
 
 async def check_rate_limit(
     user_id: str = Depends(verify_user),
@@ -75,7 +73,6 @@ async def check_rate_limit(
     
     return user_id
 
-
 # ============= Pydantic Models =============
 
 class QuestionResponse(BaseModel):
@@ -84,20 +81,17 @@ class QuestionResponse(BaseModel):
     category: str
     difficulty: int
 
-
 class AnswerSubmission(BaseModel):
     user_id: str = Field(..., min_length=1)
     question_id: int
     user_answer: str = Field(..., min_length=1)
     time_taken: Optional[int] = 0
 
-
 class AnswerResponse(BaseModel):
     correct: bool
     actual_answer: str
     points_earned: int
     message: str
-
 
 class UserStatsResponse(BaseModel):
     user_id: str
@@ -107,7 +101,6 @@ class UserStatsResponse(BaseModel):
     level: int
     points: int
 
-
 class LeaderboardEntry(BaseModel):
     rank: int
     user_id: str
@@ -115,12 +108,10 @@ class LeaderboardEntry(BaseModel):
     points: int
     accuracy: float
 
-
 class CategoryInfo(BaseModel):
     category: str
     arabic_name: str
     count: int
-
 
 # ============= Endpoints =============
 
@@ -134,9 +125,8 @@ async def qa_health():
         "status": "healthy",
         "total_questions": total_questions,
         "categories": len(categories),
-        "system": "Q&A System عاملة بتمام التمام"
+        "system": "Q&A System   "
     }
-
 
 @router.get("/categories")
 async def get_categories() -> List[CategoryInfo]:
@@ -144,25 +134,22 @@ async def get_categories() -> List[CategoryInfo]:
     categories = qa_db.get_categories()
     return [CategoryInfo(**cat) for cat in categories]
 
-
 @router.get("/random")
 async def get_random_question(
-    category: Optional[str] = Query(None, description="اختار الـ category اللي انت محتاجها")
+    category: Optional[str] = Query(None, description="  category   ")
 ) -> QuestionResponse:
-    """
-    اطلب سؤال عشوائي
-    - اختياري category من: security, ai, tech, management, general
+    """ - category : security, ai, tech, management, general
     """
     if category and category not in CATEGORIES:
         raise HTTPException(
             status_code=400,
-            detail=f"الـ category غلط. اختار من: {', '.join(CATEGORIES.keys())}"
+            detail=f" category .  : {', '.join(CATEGORIES.keys())}"
         )
     
     question = qa_db.get_random_question(category=category)
     
     if not question:
-        raise HTTPException(status_code=404, detail="ما في أسئلة في الـ category دي")
+        raise HTTPException(status_code=404, detail="     category ")
     
     # Don't return answer in the question endpoint
     return QuestionResponse(
@@ -172,14 +159,13 @@ async def get_random_question(
         difficulty=question['difficulty']
     )
 
-
 @router.get("/question/{question_id}")
 async def get_question(question_id: int) -> QuestionResponse:
     """Get a specific question by ID"""
     question = qa_db.get_question_by_id(question_id)
     
     if not question:
-        raise HTTPException(status_code=404, detail="السؤال ما في")
+        raise HTTPException(status_code=404, detail="  ")
     
     return QuestionResponse(
         id=question['id'],
@@ -187,7 +173,6 @@ async def get_question(question_id: int) -> QuestionResponse:
         category=question['category'],
         difficulty=question['difficulty']
     )
-
 
 @router.post("/answer")
 async def submit_answer(
@@ -201,7 +186,7 @@ async def submit_answer(
     question = qa_db.get_question_by_id(submission.question_id)
     
     if not question:
-        raise HTTPException(status_code=404, detail="السؤال ما في")
+        raise HTTPException(status_code=404, detail="  ")
     
     # Check if answer is correct (simple string matching for now)
     # In a real system, you'd use more sophisticated NLP/semantic matching
@@ -240,7 +225,6 @@ async def submit_answer(
         message=_get_feedback_message(is_correct, question['difficulty'])
     )
 
-
 @router.get("/stats/{user_id}")
 async def get_user_stats(user_id: str) -> UserStatsResponse:
     """Get user statistics and progress"""
@@ -262,7 +246,6 @@ async def get_user_stats(user_id: str) -> UserStatsResponse:
         **stats
     )
 
-
 @router.get("/leaderboard")
 async def get_leaderboard(
     limit: int = Query(100, ge=1, le=1000)
@@ -270,7 +253,6 @@ async def get_leaderboard(
     """Get top users leaderboard"""
     leaderboard = qa_db.get_leaderboard(limit=limit)
     return [LeaderboardEntry(**entry) for entry in leaderboard]
-
 
 @router.get("/search")
 async def search_questions(
@@ -281,7 +263,7 @@ async def search_questions(
     if category and category not in CATEGORIES:
         raise HTTPException(
             status_code=400,
-            detail=f"الـ category غلط. اختار من: {', '.join(CATEGORIES.keys())}"
+            detail=f" category .  : {', '.join(CATEGORIES.keys())}"
         )
     
     results = qa_db.search_questions(keyword, category=category)
@@ -296,14 +278,13 @@ async def search_questions(
         for r in results
     ]
 
-
 @router.get("/stats/category/{category}")
 async def get_category_stats(category: str) -> dict:
     """Get statistics for a specific category"""
     if category not in CATEGORIES:
         raise HTTPException(
             status_code=400,
-            detail=f"الـ category غلط. اختار من: {', '.join(CATEGORIES.keys())}"
+            detail=f" category .  : {', '.join(CATEGORIES.keys())}"
         )
     
     categories = qa_db.get_categories()
@@ -316,9 +297,8 @@ async def get_category_stats(category: str) -> dict:
         "category": cat_info['category'],
         "arabic_name": cat_info['arabic_name'],
         "total_questions": cat_info['count'],
-        "message": f"في {cat_info['count']} سؤال في الـ {cat_info['arabic_name']}"
+        "message": f" {cat_info['count']}    {cat_info['arabic_name']}"
     }
-
 
 # ============= Advanced Features: Analytics, Security, Recommendations =============
 
@@ -349,7 +329,6 @@ async def get_personalized_recommendations(
     
     return recommendations
 
-
 @router.get("/reviews/{user_id}")
 async def get_spaced_repetition_reviews(
     user_id: str = Depends(verify_user),
@@ -366,7 +345,6 @@ async def get_spaced_repetition_reviews(
         "due_for_review": len(questions),
         "questions": questions
     }
-
 
 @router.get("/analytics/{user_id}")
 async def get_user_analytics(
@@ -385,7 +363,6 @@ async def get_user_analytics(
         "generated_at": datetime.now().isoformat()
     }
 
-
 @router.get("/analytics/system/health")
 async def get_system_health() -> dict:
     """Get system-wide health metrics"""
@@ -398,7 +375,6 @@ async def get_system_health() -> dict:
         "timestamp": datetime.now().isoformat()
     }
 
-
 @router.get("/security/{user_id}")
 async def get_user_security_report(
     user_id: str = Depends(verify_user)
@@ -410,7 +386,6 @@ async def get_user_security_report(
         "security_report": report,
         "generated_at": datetime.now().isoformat()
     }
-
 
 @router.post("/session/create")
 async def create_session(
@@ -434,7 +409,6 @@ async def create_session(
         "created_at": datetime.now().isoformat()
     }
 
-
 @router.post("/session/validate")
 async def validate_session(
     session_token: str = Header(..., alias="X-Session-Token")
@@ -450,7 +424,6 @@ async def validate_session(
         "user_id": user_id,
         "timestamp": datetime.now().isoformat()
     }
-
 
 @router.post("/admin/log-activity")
 async def log_suspicious_activity(
@@ -474,7 +447,6 @@ async def log_suspicious_activity(
         "timestamp": datetime.now().isoformat()
     }
 
-
 @router.get("/leaderboard/advanced")
 async def get_advanced_leaderboard(
     time_period: str = Query("all", regex="^(day|week|month|all)$"),
@@ -492,7 +464,6 @@ async def get_advanced_leaderboard(
         "leaderboard": filtered_leaderboard,
         "generated_at": datetime.now().isoformat()
     }
-
 
 @router.post("/quiz/start")
 async def start_adaptive_quiz(
@@ -513,7 +484,7 @@ async def start_adaptive_quiz(
         user_id=user_id,
         session_id=session_id,
         category=category or "general",
-        difficulty_level=difficulty or "متوسط",
+        difficulty_level=difficulty or "",
         questions_count=size,
         correct_answers=0,
         time_spent=0
@@ -543,7 +514,6 @@ async def start_adaptive_quiz(
         "created_at": datetime.now().isoformat()
     }
 
-
 # ============= Helper Functions =============
 
 def _check_answer(user_answer: str, correct_answer: str) -> bool:
@@ -572,24 +542,23 @@ def _check_answer(user_answer: str, correct_answer: str) -> bool:
     
     return similarity >= 0.7
 
-
 def _get_feedback_message(is_correct: bool, difficulty: int) -> str:
     """Generate appropriate feedback message"""
     if is_correct:
         messages = [
-            "تمام التمام! 🎉",
-            "صحيح! ممتاز",
-            "أحسنت! 🌟",
-            "ده الرد الصح بالظبط!",
-            "براافو! إجابة صحيحة"
+            " ! 🎉",
+            "! ",
+            "! 🌟",
+            "   !",
+            "!  "
         ]
     else:
         messages = [
-            "خاطئ، حاول مرة تانية",
-            "المرة دي ما كانت الصحيحة",
-            "قريب! فكر أكتر",
-            "حاول تركز أكتر في الإجابة",
-            "ما تستسلمش، جرب سؤال تاني"
+            "   ",
+            "    ",
+            "!  ",
+            "    ",
+            "    "
         ]
     
     import random

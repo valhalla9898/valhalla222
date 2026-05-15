@@ -3,7 +3,6 @@ from playwright.sync_api import sync_playwright
 
 from tests.e2e.helpers import login_as_admin
 
-
 def test_ai_assistant_can_answer_and_summarize(tmp_path):
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
@@ -14,7 +13,7 @@ def test_ai_assistant_can_answer_and_summarize(tmp_path):
         page.wait_for_selector('text=🤖 AI Assistant', timeout=10000)
         page.click('text=🤖 AI Assistant')
         page.wait_for_selector('text=Ask Your Question', timeout=10000)
-        page.get_by_label('Type your question (English or العربية, spelling errors are OK!)').fill(
+        page.get_by_label('Type your question (English or , spelling errors are OK!)').fill(
             'How do I register an agent?'
         )
         page.get_by_role('button', name='🔍 Search for Answers').click()
