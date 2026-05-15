@@ -1,155 +1,163 @@
 # Agentic-IAM
 
-Agentic-IAM is a Python-based identity and access management project for agent-centric workloads. It includes authentication, authorization, session handling, audit logging, credential management, and a Streamlit dashboard for local administration.
+Agentic-IAM — نظام إدارة الهوية والصلاحيات مخصّص للأعمال المعتمدة على الوكلاء (agent-centric).
+المشروع مكتوب بـ Python ويجمع بين واجهة إدارة محلية عبر Streamlit، خدمات المصادقة والتفويض، إدارة الجلسات، سجل المراجعة (audit), وأدوات نشر وتشغيل محلية وسحابية.
 
-## What is included
+---
 
-- Streamlit dashboard for managing agents and reviewing status
-- Authentication and authorization helpers
-- Session and credential management utilities
-- Audit and compliance logging
-- AI assistant CLI scripts for guided help
-- Local database-backed configuration and startup scripts
+## نظرة سريعة (Arabic)
 
-## Repository layout
+- واجهة Streamlit لإدارة الوكلاء ومراقبة الحالة
+- مصادقة وتفويض جاهزة (authentication & authorization)
+- إدارة الجلسات، التوثيق، وإدارة بيانات الاعتماد
+- تسجيل تدقيق وامتثال (audit & compliance)
+- أدوات CLI لمساعدات قائمة على الذكاء الاصطناعي
+- سكربتات تشغيل ونشر محلية وملفات مساعدة للنشر على Azure/Docker
 
-- `app.py` - Streamlit dashboard entry point
-- `main.py` - Platform orchestrator for API and dashboard startup
-- `run_gui.py` - Convenience launcher for the dashboard
-- `run_dashboard.bat` - Windows launcher for the dashboard
-- `setup_admin.py` - Bootstrap admin account setup
-- `check_all.ps1` - PowerShell quality gate script
-- `requirements.txt` - Python dependencies
+## Quick Overview (English)
 
-## Requirements
+Agentic-IAM is a full-stack Python project providing identity & access management for agent workflows, including:
 
-- Python 3.9 or newer
-- PowerShell 5.1 or Command Prompt on Windows
-- Git for cloning and updates
+- Streamlit admin dashboard
+- API entry points and orchestrator
+- Audit logging and compliance helpers
+- Deployment scripts and Azure artifacts
 
-## Quick start
+---
 
-### 1. Clone the repository
+## Getting Started
+
+Prerequisites:
+
+- Python 3.9+
+- Git
+- (Optional) Docker for containerized runs
+
+Clone and prepare:
 
 ```bash
 git clone <your-github-repo-url>
 cd Agentic-IAM-main
-```
-
-### 2. Create a virtual environment
-
-```bash
 python -m venv .venv
 ```
 
-### 3. Activate the environment
+Activate and install:
 
 PowerShell:
 
 ```powershell
-.venv\Scripts\Activate.ps1
-```
-
-Command Prompt:
-
-```bat
-.venv\Scripts\activate.bat
-```
-
-### 4. Install dependencies
-
-```bash
+.venv\\Scripts\\Activate.ps1
 pip install -r requirements.txt
 ```
 
-### 5. Start the dashboard
+Linux / macOS:
+
+```bash
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+Run the dashboard locally:
 
 ```bash
 python run_gui.py
 ```
 
-Or on Windows:
+Or use the provided Windows launcher:
 
 ```bat
 run_dashboard.bat
 ```
 
-Then open:
+Open your browser at `http://localhost:8501`.
 
-```text
-http://localhost:8501
-```
+---
 
-## Bootstrap admin account
+## Important Commands
 
-The project does not ship with hard-coded demo credentials. Create the first admin account locally:
+- Create bootstrap admin account:
 
 ```bash
 python setup_admin.py
 ```
 
-Optional environment variable:
-
-```bash
-set AGENTIC_IAM_ADMIN_PASSWORD=YourStrongPasswordHere
-```
-
-## Configuration
-
-The main configuration object is in `config/settings.py`. Common settings include:
-
-- `ENVIRONMENT`
-- `DEBUG`
-- `API_HOST`
-- `API_PORT`
-- `LOG_LEVEL`
-- `SECRET_KEY`
-- `ENCRYPTION_KEY`
-- `ENABLE_MTLS`
-- `ENABLE_AUDIT_LOGGING`
-
-The defaults are intended for local development. Production deployments should override secrets and review TLS, database, and audit settings before use.
-
-## Testing
-
-Run the local checks:
+- Run quick local checks:
 
 ```bash
 python test_setup.py
 ```
 
-On Windows, you can also use:
-
-```powershell
-.\check_all.ps1
-```
-
-If you have pytest installed, run the test suite directly:
+- Run full test suite (if pytest installed):
 
 ```bash
 pytest
 ```
 
-## Security notes
+---
 
-- Do not commit real secrets to the repository.
-- Use environment variables or secret storage for production values.
-- Review `SECRET_KEY` and `ENCRYPTION_KEY` before deploying.
-- Enable mTLS only after certificates and endpoints are configured correctly.
+## Configuration
 
-## Launch options
+Main configuration: `config/settings.py`.
+Key settings to review for production:
 
-- `python run_gui.py` for the dashboard
-- `python app.py` for the Streamlit app entry point
-- `python main.py` for the broader platform orchestrator
+- `ENVIRONMENT` — development|staging|production
+- `SECRET_KEY` / `ENCRYPTION_KEY` — DO NOT commit real secrets
+- `API_HOST`, `API_PORT`
+- `LOG_LEVEL`, `ENABLE_AUDIT_LOGGING`, `ENABLE_MTLS`
+
+Use environment variables or secret stores (Key Vault) in production.
+
+---
+
+## Docker & Deployment
+
+The repository includes Dockerfiles and Azure deployment artifacts (`azure.yaml`, infra Bicep files).
+
+To build locally with Docker:
+
+```bash
+docker build -t agentic-iam:local .
+docker run -p 8501:8501 agentic-iam:local
+```
+
+For Azure or production deployment, review `AZURE_DEPLOYMENT_GUIDE.md` and `infra/`.
+
+---
+
+## Files of Interest
+
+- `app.py` — Streamlit dashboard entry
+- `main.py` — orchestrator for API + UI
+- `run_gui.py`, `run_dashboard.bat` — launchers
+- `config/settings.py` — configuration defaults
+- `deploy-to-azure.ps1`, `azure.yaml`, `infra/` — deployment helpers
+
+---
 
 ## Contributing
 
-1. Create a feature branch.
-2. Make focused changes.
+1. Fork the repository and create a feature branch.
+2. Make changes and add tests where applicable.
 3. Run tests locally.
-4. Open a pull request with a short summary of the change.
+4. Open a Pull Request with a clear description and reference issues.
+
+Please follow conventional commits for clear history (e.g., `feat:`, `fix:`, `docs:`).
+
+---
+
+## Security & Secrets
+
+- Never commit plain secrets. Use environment variables or secret managers.
+- Rotate keys and review `security_report.json` and `SECURITY_TESTING.md` before production.
+
+---
 
 ## License
 
 MIT
+
+---
+
+## Contact
+
+If you want me to draft a GitHub release, open a PR, or translate this README fully to English only, tell me which and I will proceed.
