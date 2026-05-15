@@ -76,12 +76,12 @@ settings_instance: Optional[Settings] = None
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
- """Manage application lifespan events"""
- global iam_instance, settings_instance
+	"""Manage application lifespan events"""
+	global iam_instance, settings_instance
 
- # Startup
- logger = get_logger("api")
- logger.info("Starting Agentic-IAM API server...")
+	# Startup
+	logger = get_logger("api")
+	logger.info("Starting Agentic-IAM API server...")
 
 	try:
 		# Initialize settings
@@ -91,7 +91,7 @@ async def lifespan(app: FastAPI):
 		setup_logging(
 			log_level=settings_instance.log_level,
 			log_file=settings_instance.log_file,
-			enable_console=True
+			enable_console=True,
 		)
 
 		# Initialize IAM system
@@ -109,11 +109,10 @@ async def lifespan(app: FastAPI):
 	finally:
 		# Shutdown
 		logger.info("Shutting down Agentic-IAM API server...")
+		if iam_instance:
+			await iam_instance.shutdown()
 
- if iam_instance:
- await iam_instance.shutdown()
-
- logger.info("API server shutdown complete")
+		logger.info("API server shutdown complete")
 
 def create_app() -> FastAPI:
  """Create and configure FastAPI application"""
