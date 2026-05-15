@@ -74,26 +74,26 @@ http://localhost:8501
 
 ```
 Agentic-IAM-main/
-├── app.py                          # Main Streamlit application
-├── agent_identity.py               # Identity management
-├── authentication.py               # Authentication
-├── authorization.py                # Authorization
+├── app.py # Main Streamlit application
+├── agent_identity.py # Identity management
+├── authentication.py # Authentication
+├── authorization.py # Authorization
 ├── config/
-│   ├── __init__.py
-│   └── settings.py                 # Configuration
+│ ├── __init__.py
+│ └── settings.py # Configuration
 ├── core/
-│   ├── __init__.py
-│   └── agentic_iam.py              # Main core engine
+│ ├── __init__.py
+│ └── agentic_iam.py # Main core engine
 ├── dashboard/
-│   ├── __init__.py
-│   ├── utils.py                    # Helper utilities
-│   └── components/
-│       ├── __init__.py
-│       └── agent_management.py    # Agent management UI
+│ ├── __init__.py
+│ ├── utils.py # Helper utilities
+│ └── components/
+│ ├── __init__.py
+│ └── agent_management.py # Agent management UI
 ├── utils/
-│   ├── __init__.py
-│   └── logger.py                   # Logging system
-└── test_setup.py                   # Environment check
+│ ├── __init__.py
+│ └── logger.py # Logging system
+└── test_setup.py # Environment check
 ```
 
 ---
@@ -131,7 +131,7 @@ dashboard_host = "127.0.0.1"
 dashboard_port = 8501
 
 # Sessions
-session_ttl = 3600  # one hour
+session_ttl = 3600 # one hour
 
 # Security
 enable_mfa = False
@@ -145,7 +145,7 @@ log_level = "INFO"
 
 ## 📊 System Information
 
-| المكون | الحالة |
+| | |
 |--------|--------|
 | Python | ✓ 3.13+ |
 | Streamlit | ✓ Installed |
@@ -161,7 +161,7 @@ log_level = "INFO"
 
 ## 🔗 Important Files
 
-| الملف | الغرض |
+| | |
 |------|--------|
 | app.py | Main Streamlit application |
 | test_setup.py | Environment check |

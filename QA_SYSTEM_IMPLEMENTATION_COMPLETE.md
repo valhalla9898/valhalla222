@@ -8,15 +8,15 @@ The Agentic-IAM project has been successfully enhanced with an **enterprise-grad
 
 ### Core Components
 ```
-✅ qa_database.py          (500+ lines)  - Database with 3000+ Egyptian Arabic questions
-✅ qa_security.py          (350+ lines)  - Security manager with rate limiting, sessions, blacklist
-✅ qa_analytics.py         (450+ lines)  - Analytics engine with comprehensive tracking
-✅ qa_recommendations.py    (400+ lines)  - Recommendation engine with SM-2 algorithm
-✅ qa_utilities.py         (400+ lines)  - Helper functions and utilities
-✅ api/routers/qa.py       (450+ lines)  - FastAPI router with 20+ endpoints
-✅ qa_dashboard.py         (350+ lines)  - Streamlit interactive dashboard
-✅ QA_SYSTEM_README.md     (400+ lines)  - Complete documentation
-✅ tests/test_qa_system.py (400+ lines)  - Comprehensive test suite
+✅ qa_database.py (500+ lines) - Database with 3000+ Egyptian Arabic questions
+✅ qa_security.py (350+ lines) - Security manager with rate limiting, sessions, blacklist
+✅ qa_analytics.py (450+ lines) - Analytics engine with comprehensive tracking
+✅ qa_recommendations.py (400+ lines) - Recommendation engine with SM-2 algorithm
+✅ qa_utilities.py (400+ lines) - Helper functions and utilities
+✅ api/routers/qa.py (450+ lines) - FastAPI router with 20+ endpoints
+✅ qa_dashboard.py (350+ lines) - Streamlit interactive dashboard
+✅ QA_SYSTEM_README.md (400+ lines) - Complete documentation
+✅ tests/test_qa_system.py (400+ lines) - Comprehensive test suite
 ```
 
 **Total: ~3700 lines of production code**
@@ -134,13 +134,13 @@ Total: Base × Difficulty × Streak + TimeBonus
 ```
 
 ### Performance Levels
-- متفوق (Excellent): 90%+ accuracy
-- ممتاز (Excellent): 80%+ accuracy
-- جيد جداً (Very Good): 70%+ accuracy
-- جيد (Good): 60%+ accuracy
-- متوسط (Fair): 50%+ accuracy
-- ضعيف (Poor): 30%+ accuracy
-- ضعيف جداً (Very Poor): <30% accuracy
+- (Excellent): 90%+ accuracy
+- (Excellent): 80%+ accuracy
+- (Very Good): 70%+ accuracy
+- (Good): 60%+ accuracy
+- (Fair): 50%+ accuracy
+- (Poor): 30%+ accuracy
+- (Very Poor): <30% accuracy
 
 ### Motivation System
 - ✅ Category-specific messages
@@ -236,14 +236,14 @@ Total: Base × Difficulty × Streak + TimeBonus
 ## 📖 Documentation
 
 - **QA_SYSTEM_README.md** (400+ lines)
-  - Overview and architecture
-  - Quick start guide
-  - Complete API documentation
-  - Database schema
-  - Security features explanation
-  - Performance tuning guide
-  - Troubleshooting section
-  - Future enhancements
+ - Overview and architecture
+ - Quick start guide
+ - Complete API documentation
+ - Database schema
+ - Security features explanation
+ - Performance tuning guide
+ - Troubleshooting section
+ - Future enhancements
 
 ## 🎯 Key Metrics
 
@@ -263,29 +263,29 @@ Total: Base × Difficulty × Streak + TimeBonus
 
 ```
 User Interface (Streamlit Dashboard / API Client)
-        ↓
+ ↓
 FastAPI Router (/api/v1/qa/*)
-        ↓
+ ↓
 ┌──────────────────────────────────────────────┐
-│  Rate Limiting & Security Check              │
-│  (qa_security.QASecurityManager)             │
+│ Rate Limiting & Security Check │
+│ (qa_security.QASecurityManager) │
 └──────────────────────────────────────────────┘
-        ↓
+ ↓
 ┌──────────────────────────────────────────────┐
-│  Question Processing                         │
-│  (qa_database.QADatabase)                    │
+│ Question Processing │
+│ (qa_database.QADatabase) │
 └──────────────────────────────────────────────┘
-        ↓
+ ↓
 ┌──────────────────────────────────────────────┐
-│  Analytics Tracking                          │
-│  (qa_analytics.QAAnalytics)                  │
+│ Analytics Tracking │
+│ (qa_analytics.QAAnalytics) │
 └──────────────────────────────────────────────┘
-        ↓
+ ↓
 ┌──────────────────────────────────────────────┐
-│  Recommendations & Learning                  │
-│  (qa_recommendations.QARecommendationEngine) │
+│ Recommendations & Learning │
+│ (qa_recommendations.QARecommendationEngine) │
 └──────────────────────────────────────────────┘
-        ↓
+ ↓
 Response with Insights & Recommendations
 ```
 

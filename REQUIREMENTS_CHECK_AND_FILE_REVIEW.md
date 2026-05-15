@@ -1,78 +1,78 @@
-# ✅ فحص المتطلبات ومراجعة الملفات
-**التاريخ:** May 8, 2026  
-**الحالة:** جاهز للنشر ✓
+# ✅ 
+**:** May 8, 2026 
+**:** ✓
 
 ---
 
-## 1️⃣ فحص المتطلبات المثبتة
+## 1️⃣ 
 
-| الأداة | الحالة | الإصدار | الإجراء |
+| | | | |
 |-------|--------|--------|--------|
-| **Azure CLI** | ❌ غير مثبت | — | **يجب تثبيته** |
-| **Docker** | ✅ مثبت | v29.1.3 | جاهز |
-| **Git** | ✅ مثبت | v2.52.0 | جاهز |
-| **PowerShell** | ✅ مثبت | النسخة الحالية | جاهز |
-| **Python** | ✅ مثبت | v3.11.9 | جاهز |
+| **Azure CLI** | ❌ | — | ** ** |
+| **Docker** | ✅ | v29.1.3 | |
+| **Git** | ✅ | v2.52.0 | |
+| **PowerShell** | ✅ | | |
+| **Python** | ✅ | v3.11.9 | |
 
 ---
 
-## 🔴 خطوة أساسية مطلوبة: تثبيت Azure CLI
+## 🔴 : Azure CLI
 
-### **على Windows:**
+### ** Windows:**
 
-#### الطريقة 1: Chocolatey (الأسرع)
+#### 1: Chocolatey ()
 ```powershell
 choco install azure-cli -y
 ```
 
-#### الطريقة 2: تحميل مباشر
-انتقل إلى: https://aka.ms/cli
+#### 2: 
+ : https://aka.ms/cli
 
-ثم في PowerShell:
+ PowerShell:
 ```powershell
-# بعد التثبيت، تحقق:
+# :
 az --version
 ```
 
-#### الطريقة 3: مع Windows Installer
+#### 3: Windows Installer
 ```powershell
-# تحميل الـ MSI من Azure CLI GitHub releases
-# ثم تشغيل Installer GUI
+# MSI Azure CLI GitHub releases
+# Installer GUI
 ```
 
-### **بعد التثبيت:**
+### ** :**
 ```powershell
-# تسجيل الدخول إلى Azure
+# Azure
 az login
 
-# التحقق من الاتصال
+# 
 az account show
 ```
 
 ---
 
-## 2️⃣ مراجعة الملفات الرئيسية
+## 2️⃣ 
 
-### ✅ ملف AZD Configuration
-**الملف:** `azure.yaml`
+### ✅ AZD Configuration
+**:** `azure.yaml`
 ```yaml
 name: agentic-iam
 services:
-  api:
-    host: containerapp  ✓
-    docker: ./Dockerfile ✓
-  web:
-    host: containerapp  ✓
-    docker: ./Dockerfile ✓
+ api:
+ host: containerapp ✓
+ docker: ./Dockerfile ✓
+ web:
+ host: containerapp ✓
+ docker: ./Dockerfile ✓
 ```
-**الحالة:** ✓ صحيح
+**:** ✓ 
 
 ---
 
 ### ✅ Bicep Main Template
-**الملف:** `infra/main.bicep`
+**:** `infra/main.bicep`
 
-**الموارد المُعرّفة:**
+** :**
 ```
 ✓ Log Analytics Workspace
 ✓ Application Insights
@@ -85,33 +85,33 @@ services:
 ✓ Azure Cache for Redis
 ✓ Private DNS Zone
 ```
-**الحالة:** ✓ شامل وكامل
+**:** ✓ 
 
 ---
 
 ### ✅ Container Apps Template
-**الملف:** `infra/resources/container-apps.bicep`
+**:** `infra/resources/container-apps.bicep`
 
-**التطبيقات المُعرّفة:**
+** :**
 ```
 ✓ Dashboard Container App (Streamlit)
-  - Port: 8501
-  - CPU: 0.5
-  - Memory: 1Gi
-  - Auto-scale: 1-3 replicas
+ - Port: 8501
+ - CPU: 0.5
+ - Memory: 1Gi
+ - Auto-scale: 1-3 replicas
 
 ✓ API Container App (FastAPI)
-  - Port: 8000
-  - CPU: 0.5
-  - Memory: 1Gi
-  - Auto-scale: 1-3 replicas
+ - Port: 8000
+ - CPU: 0.5
+ - Memory: 1Gi
+ - Auto-scale: 1-3 replicas
 ```
-**الحالة:** ✓ جاهز
+**:** ✓ 
 
 ---
 
 ### ✅ Parameters File
-**الملف:** `infra/main.bicepparams`
+**:** `infra/main.bicepparams`
 ```bicep
 location = 'eastus'
 environment = 'prod'
@@ -119,45 +119,45 @@ projectName = 'agentic-iam'
 postgresqlSkuName = 'Standard_B2s'
 redisSkuName = 'Standard'
 ```
-**الحالة:** ✓ معرّف
+**:** ✓ 
 
 ---
 
 ### ✅ Deployment Script
-**الملف:** `deploy-to-azure.ps1`
+**:** `deploy-to-azure.ps1`
 
-**ما يفعله:**
+** :**
 ```
-1. ✓ فحص المتطلبات
-2. ✓ التحقق من تسجيل الدخول
-3. ✓ إنشاء Resource Group
-4. ✓ بناء Docker Image
-5. ✓ دفع إلى Container Registry
-6. ✓ نشر Bicep Template
-7. ✓ تكوين Container Apps
-8. ✓ فحص الصحة (Health Check)
+1. ✓ 
+2. ✓ 
+3. ✓ Resource Group
+4. ✓ Docker Image
+5. ✓ Container Registry
+6. ✓ Bicep Template
+7. ✓ Container Apps
+8. ✓ (Health Check)
 ```
-**الحالة:** ✓ جاهز للتنفيذ
+**:** ✓ 
 
 ---
 
 ### ✅ Deployment Plan
-**الملف:** `.azure/deployment-plan.md`
+**:** `.azure/deployment-plan.md`
 
-**الحالة:**
+**:**
 - Status: **Validated** ✓
 - Phase 1: **Complete** ✓
 - Phase 2: **Complete** ✓
 - Phase 3: **Validation Proof Complete** ✓
 
-**الحالة:** ✓ معتمد وقابل للنشر
+**:** ✓ 
 
 ---
 
 ### ✅ GitHub Actions Pipeline
-**الملف:** `.github/workflows/azure-deploy.yml`
+**:** `.github/workflows/azure-deploy.yml`
 
-**الوظائف المدمجة:**
+** :**
 ```
 ✓ Build (Docker image)
 ✓ Test (pytest)
@@ -165,7 +165,7 @@ redisSkuName = 'Standard'
 ✓ Verify (Health check)
 ✓ Notifications (Slack)
 ```
-**الحالة:** ✓ جاهز لـ CI/CD
+**:** ✓ CI/CD
 
 ---
 
@@ -176,13 +176,13 @@ redisSkuName = 'Standard'
 ✓ VENV_SETUP.md
 ✓ README.md
 ```
-**الحالة:** ✓ كامل ومفصل
+**:** ✓ 
 
 ---
 
-## 📋 ملخص حالة الملفات
+## 📋 
 
-| الملف | الحجم | الحالة |
+| | | |
 |-----|-------|--------|
 | azure.yaml | 1.5 KB | ✓ |
 | infra/main.bicep | 12 KB | ✓ |
@@ -192,70 +192,70 @@ redisSkuName = 'Standard'
 | AZURE_DEPLOYMENT_GUIDE.md | 25 KB | ✓ |
 | PRE_DEPLOYMENT_CHECKLIST.md | 12 KB | ✓ |
 
-**المجموع:** ~75 KB من ملفات النشر المُحسّنة
+**:** ~75 KB 
 
 ---
 
-## 🚀 الخطوة التالية
+## 🚀 
 
-### **1. تثبيت Azure CLI (مطلوب)**
+### **1. Azure CLI ()**
 
 ```powershell
-# اختر واحدة من الطريق أعلاه
+# 
 
-# ثم تحقق:
+# :
 az --version
 ```
 
-### **2. بعد التثبيت مباشرة:**
+### **2. :**
 
 ```powershell
-# تسجيل دخول
+# 
 az login
 
-# التحقق من الاشتراك الصحيح
+# 
 az account show
 
-# نسخ Subscription ID:
+# Subscription ID:
 az account list --query "[].{Name:name, ID:id}" -o table
 ```
 
-### **3. تنفيذ النشر:**
+### **3. :**
 
 ```powershell
 cd C:\Users\Lenovo\Desktop\Agentic-IAM-main
 
-# الطريقة الأوتوماتيكية
+# 
 .\deploy-to-azure.ps1 -Environment prod -Location eastus
 ```
 
 ---
 
-## 🎯 خلاصة الجاهزية
+## 🎯 
 
-| العنصر | الحالة |
+| | |
 |-------|--------|
-| **Bicep Templates** | ✅ جاهز |
-| **Docker Configuration** | ✅ جاهز |
-| **AZD Config** | ✅ جاهز |
-| **Deployment Script** | ✅ جاهز |
-| **Documentation** | ✅ جاهز |
-| **Validation** | ✅ معتمد |
-| **Azure CLI** | ❌ **مطلوب التثبيت** |
+| **Bicep Templates** | ✅ |
+| **Docker Configuration** | ✅ |
+| **AZD Config** | ✅ |
+| **Deployment Script** | ✅ |
+| **Documentation** | ✅ |
+| **Validation** | ✅ |
+| **Azure CLI** | ❌ ** ** |
 
 ---
 
-## ⏱️ الوقت المتبقي
+## ⏱️ 
 
-بعد تثبيت Azure CLI:
-- **وقت النشر:** 15-20 دقيقة
-- **وقت التحضير:** 5 دقائق (تسجيل دخول)
-- **المجموع:** ~25 دقيقة
+ Azure CLI:
+- ** :** 15-20 
+- ** :** 5 ( )
+- **:** ~25 
 
 ---
 
-## ✨ تاريخ آخر تحديث
+## ✨ 
 
-**May 8, 2026** — جميع الملفات محدثة وجاهزة
+**May 8, 2026** — 
 
-**الخطوة التالية:** تثبيت Azure CLI ثم النشر ✓
+** :** Azure CLI ✓

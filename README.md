@@ -1,18 +1,18 @@
 # Agentic-IAM
 
-Agentic-IAM — نظام إدارة الهوية والصلاحيات مخصّص للأعمال المعتمدة على الوكلاء (agent-centric).
-المشروع مكتوب بـ Python ويجمع بين واجهة إدارة محلية عبر Streamlit، خدمات المصادقة والتفويض، إدارة الجلسات، سجل المراجعة (audit), وأدوات نشر وتشغيل محلية وسحابية.
+Agentic-IAM — (agent-centric).
+ Python Streamlit (audit), .
 
 ---
 
-## نظرة سريعة (Arabic)
+## (Arabic)
 
-- واجهة Streamlit لإدارة الوكلاء ومراقبة الحالة
-- مصادقة وتفويض جاهزة (authentication & authorization)
-- إدارة الجلسات، التوثيق، وإدارة بيانات الاعتماد
-- تسجيل تدقيق وامتثال (audit & compliance)
-- أدوات CLI لمساعدات قائمة على الذكاء الاصطناعي
-- سكربتات تشغيل ونشر محلية وملفات مساعدة للنشر على Azure/Docker
+- Streamlit 
+- (authentication & authorization)
+- 
+- (audit & compliance)
+- CLI 
+- Azure/Docker
 
 ## Quick Overview (English)
 

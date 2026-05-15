@@ -3,19 +3,19 @@ from pyspark.sql.functions import col, trim
 
 spark = SparkSession.builder.appName("CreditCardChurn_Preprocess").getOrCreate()
 
-# INPUT CSV (عدّل اسم الملف لو مختلف)
+# INPUT CSV ( )
 input_csv = r"C:\Users\Lenovo\Desktop\archive\credit_card_churn.csv"
 
 # Read data
 df = (spark.read
-      .option("header", True)
-      .option("inferSchema", True)
-      .csv(input_csv))
+ .option("header", True)
+ .option("inferSchema", True)
+ .csv(input_csv))
 
-# Simple cleaning (Spark is used فعليًا)
+# Simple cleaning (Spark is used )
 for c, t in df.dtypes:
-    if t == "string":
-        df = df.withColumn(c, trim(col(c)))
+ if t == "string":
+ df = df.withColumn(c, trim(col(c)))
 
 # Drop rows without target
 df = df.na.drop(subset=["Churn"])

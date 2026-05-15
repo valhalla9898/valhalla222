@@ -16,7 +16,7 @@ streamlit run qa_dashboard.py
 ### 3. Test an Endpoint
 ```bash
 curl -X GET "http://localhost:8000/api/v1/qa/health" \
-  -H "X-User-ID: test_user"
+ -H "X-User-ID: test_user"
 ```
 
 ---
@@ -35,13 +35,13 @@ curl -X GET "http://localhost:8000/api/v1/qa/health" \
 **Architecture:**
 ```
 FastAPI (api/main.py) → /api/v1/qa/* routes
-    ↓
+ ↓
 qa_security.py → Rate limiting, sessions, security
-    ↓
+ ↓
 qa_database.py → 3000+ questions
-    ↓
+ ↓
 qa_analytics.py → User tracking, metrics
-    ↓
+ ↓
 qa_recommendations.py → Smart learning paths
 ```
 
@@ -83,7 +83,7 @@ POST /api/v1/qa/session/create
 
 # Validate session
 POST /api/v1/qa/session/validate
-  -H "X-Session-Token: token"
+ -H "X-Session-Token: token"
 ```
 
 ---
@@ -128,79 +128,79 @@ pytest tests/test_qa_system.py --cov=qa_database
 
 ### 1. Get a Question
 ```bash
-curl -X GET "http://localhost:8000/api/v1/qa/random?category=برمجة" \
-  -H "X-User-ID: user123"
+curl -X GET "http://localhost:8000/api/v1/qa/random?category=" \
+ -H "X-User-ID: user123"
 ```
 
 **Response:**
 ```json
 {
-  "id": 42,
-  "question": "ما هي لغة Python؟",
-  "category": "برمجة",
-  "difficulty": 2
+ "id": 42,
+ "question": " Python",
+ "category": "",
+ "difficulty": 2
 }
 ```
 
 ### 2. Submit Answer
 ```bash
 curl -X POST "http://localhost:8000/api/v1/qa/answer" \
-  -H "X-User-ID: user123" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "user_id": "user123",
-    "question_id": 42,
-    "user_answer": "لغة برمجة عالية المستوى",
-    "time_taken": 45
-  }'
+ -H "X-User-ID: user123" \
+ -H "Content-Type: application/json" \
+ -d '{
+ "user_id": "user123",
+ "question_id": 42,
+ "user_answer": " ",
+ "time_taken": 45
+ }'
 ```
 
 **Response:**
 ```json
 {
-  "correct": true,
-  "actual_answer": "لغة برمجة...",
-  "points_earned": 12,
-  "message": "تمام التمام! 🎉"
+ "correct": true,
+ "actual_answer": " ...",
+ "points_earned": 12,
+ "message": " ! 🎉"
 }
 ```
 
 ### 3. Get Analytics
 ```bash
 curl -X GET "http://localhost:8000/api/v1/qa/analytics/user123" \
-  -H "X-User-ID: user123"
+ -H "X-User-ID: user123"
 ```
 
 **Response:**
 ```json
 {
-  "statistics": {
-    "total_questions_attempted": 150,
-    "total_correct_answers": 120,
-    "overall_accuracy_percentage": 80.0
-  },
-  "performance_insights": {...},
-  "category_breakdown": {...}
+ "statistics": {
+ "total_questions_attempted": 150,
+ "total_correct_answers": 120,
+ "overall_accuracy_percentage": 80.0
+ },
+ "performance_insights": {...},
+ "category_breakdown": {...}
 }
 ```
 
 ### 4. Get Recommendations
 ```bash
 curl -X GET "http://localhost:8000/api/v1/qa/recommendations/user123?limit=5" \
-  -H "X-User-ID: user123"
+ -H "X-User-ID: user123"
 ```
 
 **Response:**
 ```json
 [
-  {
-    "question_id": 88,
-    "question_text": "السؤال...",
-    "category": "أمان",
-    "difficulty_level": "متقدم",
-    "reason": "Helps strengthen weak area",
-    "confidence_score": 85
-  }
+ {
+ "question_id": 88,
+ "question_text": "...",
+ "category": "",
+ "difficulty_level": "",
+ "reason": "Helps strengthen weak area",
+ "confidence_score": 85
+ }
 ]
 ```
 
@@ -218,15 +218,15 @@ Streak: up to 2x multiplier
 
 ### Example
 - **Correct answer** on difficult question in 30 seconds with streak of 5:
-  - (10 × 2.0 + 5) × 1.4 = **39 points**
+ - (10 × 2.0 + 5) × 1.4 = **39 points**
 
 ### Performance Levels
-- 90%+ = متفوق (Excellent)
-- 80%+ = ممتاز (Very Good)
-- 70%+ = جيد جداً (Good)
-- 60%+ = جيد (Fair)
-- 50%+ = متوسط (Average)
-- <50% = ضعيف (Poor)
+- 90%+ = (Excellent)
+- 80%+ = (Very Good)
+- 70%+ = (Good)
+- 60%+ = (Fair)
+- 50%+ = (Average)
+- <50% = (Poor)
 
 ---
 
@@ -259,16 +259,16 @@ rm -rf ~/.streamlit
 
 ```
 Agentic-IAM-main/
-├── qa_database.py              ← Questions & answers (3000+)
-├── qa_security.py              ← Rate limiting, sessions
-├── qa_analytics.py             ← User tracking, metrics
-├── qa_recommendations.py        ← Smart recommendations
-├── qa_utilities.py             ← Helper functions
-├── qa_dashboard.py             ← Streamlit UI
-├── api/routers/qa.py           ← API endpoints
-├── QA_SYSTEM_README.md         ← Full documentation
+├── qa_database.py ← Questions & answers (3000+)
+├── qa_security.py ← Rate limiting, sessions
+├── qa_analytics.py ← User tracking, metrics
+├── qa_recommendations.py ← Smart recommendations
+├── qa_utilities.py ← Helper functions
+├── qa_dashboard.py ← Streamlit UI
+├── api/routers/qa.py ← API endpoints
+├── QA_SYSTEM_README.md ← Full documentation
 ├── QA_SYSTEM_IMPLEMENTATION_COMPLETE.md
-└── tests/test_qa_system.py     ← Test suite
+└── tests/test_qa_system.py ← Test suite
 ```
 
 ---

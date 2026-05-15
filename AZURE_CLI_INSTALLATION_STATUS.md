@@ -1,103 +1,103 @@
-# ✅ تقرير تثبيت Azure CLI
+# ✅ Azure CLI
 
-**التاريخ:** May 8, 2026  
-**الحالة:** ✅ مثبتة (بنجاح عبر winget)
-
----
-
-## 📊 ملخص التثبيت
-
-### ✅ ما تم إنجازه:
-
-1. **✓ winget (Windows Package Manager)** — موجود وجاهز
-2. **✓ تثبيت Azure CLI v2.86.0** — اكتمل بنجاح عبر MSI Installer
-   ```
-   Found Microsoft Azure CLI [Microsoft.AzureCLI] Version 2.86.0
-   Successfully verified installer hash
-   Successfully installed
-   ```
-
-### ⏳ الحالة الحالية:
-
-- **Azure CLI:** ✅ مثبتة على النظام
-- **تحديث PATH:** ⏳ يتطلب إعادة تشغيل PowerShell / النظام
-
-### 🔴 المشكلة:
-
-جلسة PowerShell الحالية لم تحدث متغيرات البيئة (PATH) تلقائياً بعد التثبيت. هذا طبيعي جداً مع MSI Installers على Windows.
+**:** May 8, 2026 
+**:** ✅ ( winget)
 
 ---
 
-## ✅ الحل - اختر واحداً من هذه:
+## 📊 
 
-### **الخيار 1: إعادة تشغيل PowerShell** (الأسهل - 1 دقيقة)
+### ✅ :
+
+1. **✓ winget (Windows Package Manager)** — 
+2. **✓ Azure CLI v2.86.0** — MSI Installer
+ ```
+ Found Microsoft Azure CLI [Microsoft.AzureCLI] Version 2.86.0
+ Successfully verified installer hash
+ Successfully installed
+ ```
+
+### ⏳ :
+
+- **Azure CLI:** ✅ 
+- ** PATH:** ⏳ PowerShell / 
+
+### 🔴 :
+
+ PowerShell (PATH) . MSI Installers Windows.
+
+---
+
+## ✅ - :
+
+### ** 1: PowerShell** ( - 1 )
 
 ```powershell
-# 1. أغلق PowerShell الحالي
-# 2. افتح PowerShell جديد (الرئيسية + X)
-# 3. شغّل:
+# 1. PowerShell 
+# 2. PowerShell ( + X)
+# 3. :
 
 az --version
 ```
 
 ---
 
-### **الخيار 2: إعادة تشغيل الكمبيوتر** (الأضمن - 2 دقيقة)
+### ** 2: ** ( - 2 )
 
 ```powershell
-# إعادة تشغيل:
+# :
 Restart-Computer
 ```
 
-ثم بعد إعادة التشغيل:
+ :
 ```powershell
 az --version
 ```
 
 ---
 
-### **الخيار 3: تثبيت مختلف - Python CLI** (بديل فوري)
+### ** 3: - Python CLI** ( )
 
-بما أن Python موجود بالفعل (v3.11.9)، يمكنك:
+ Python (v3.11.9) :
 
 ```powershell
-# التثبيت عبر pip (إذا لم ينجح winget بعد)
+# pip ( winget )
 python -m pip install azure-cli
 
-# التحقق:
+# :
 python -m azure.cli --version
 ```
 
 ---
 
-## 🚀 الخطوات التالية بعد الانتهاء:
+## 🚀 :
 
-### 1️⃣ تسجيل الدخول إلى Azure:
+### 1️⃣ Azure:
 
 ```powershell
 az login
 ```
 
-### 2️⃣ التحقق من الاشتراك الصحيح:
+### 2️⃣ :
 
 ```powershell
 az account show
 ```
 
-### 3️⃣ النشر على Azure:
+### 3️⃣ Azure:
 
 ```powershell
 cd C:\Users\Lenovo\Desktop\Agentic-IAM-main
 
-# النشر الكامل - الأوتوماتيكي:
+# - :
 .\deploy-to-azure.ps1 -Environment prod -Location eastus
 ```
 
 ---
 
-## 📋 ملفات التثبيت الموجودة:
+## 📋 :
 
-جميع ملفات النشر جاهزة ومعدة:
+ :
 
 ```
 ✓ azure.yaml
@@ -113,35 +113,35 @@ cd C:\Users\Lenovo\Desktop\Agentic-IAM-main
 
 ---
 
-## 🎯 الحالة النهائية:
+## 🎯 :
 
-| العنصر | الحالة | الملاحظات |
+| | | |
 |-------|--------|---------|
-| **Docker** | ✓ جاهز | v29.1.3 |
-| **Git** | ✓ جاهز | v2.52.0 |
-| **Python** | ✓ جاهز | v3.11.9 |
-| **Azure CLI** | ✓ مثبتة | v2.86.0 (يتطلب إعادة تشغيل) |
-| **البنية التحتية** | ✓ معدة | Bicep + AZD |
-| **الأتمتة** | ✓ جاهزة | Scripts + GitHub Actions |
+| **Docker** | ✓ | v29.1.3 |
+| **Git** | ✓ | v2.52.0 |
+| **Python** | ✓ | v3.11.9 |
+| **Azure CLI** | ✓ | v2.86.0 ( ) |
+| ** ** | ✓ | Bicep + AZD |
+| **** | ✓ | Scripts + GitHub Actions |
 
 ---
 
-## ⏱️ التقدير الزمني:
+## ⏱️ :
 
-| الخطوة | الوقت |
+| | |
 |-------|-------|
-| إعادة تشغيل PowerShell | 30 ثانية |
-| تسجيل الدخول (`az login`) | 1 دقيقة |
-| النشر الكامل (`deploy-to-azure.ps1`) | 15-20 دقيقة |
-| **المجموع** | **16-22 دقيقة** |
+| PowerShell | 30 |
+| (`az login`) | 1 |
+| (`deploy-to-azure.ps1`) | 15-20 |
+| **** | **16-22 ** |
 
 ---
 
-## ✨ التالي:
+## ✨ :
 
-1. **أعد تشغيل PowerShell أو النظام**
-2. **شغّل:** `az --version`
-3. **ثم:** `az login`
-4. **أخيراً:** `.\deploy-to-azure.ps1 -Environment prod -Location eastus`
+1. ** PowerShell **
+2. **:** `az --version`
+3. **:** `az login`
+4. **:** `.\deploy-to-azure.ps1 -Environment prod -Location eastus`
 
-**جاهز للنشر!** 🚀
+** !** 🚀
