@@ -1,0 +1,18 @@
+{
+  "company_name": "Valhalla",
+  "deployment_environment": "development",
+  "identity_provider": "Microsoft Entra ID",
+  "app_url": "http://localhost:8501",
+  "api_url": "http://localhost:8000/api",
+  "database_type": "SQLite",
+  "database_url": "sqlite:///valhalla_demo.db",
+  "enable_sso": true,
+  "admin_username": "valhalla_admin",
+  "admin_email": "admin@valhalla.local",
+  "admin_password": "Valhalla@12345",
+  "company_app_url": "http://localhost:8501",
+  "tenant_display_name": "Valhalla Demo Tenant",
+  "support_contact": "support@valhalla.local",
+  "theme": "dark",
+  "seed_data_profile": "enterprise-demo"
+}

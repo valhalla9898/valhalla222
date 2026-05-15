@@ -1,0 +1,60 @@
+# Azure Developer CLI Configuration
+# Project: Agentic-IAM
+
+name: agentic-iam
+metadata:
+  description: "Comprehensive Agent Identity & Access Management Platform"
+  template: "agentic-iam@0.1.0"
+
+# Services
+services:
+  api:
+    project: .
+    language: python
+    host: containerapp
+    docker:
+      path: ./Dockerfile
+      context: .
+      buildArgs:
+        - TARGET=production
+
+  web:
+    project: .
+    language: python
+    host: containerapp
+    docker:
+      path: ./Dockerfile
+      context: .
+      buildArgs:
+        - TARGET=production
+
+# Environment variables
+env:
+  AGENTIC_IAM_ENVIRONMENT: production
+  AGENTIC_IAM_API_HOST: 0.0.0.0
+  AGENTIC_IAM_API_PORT: 8000
+  AGENTIC_IAM_DASHBOARD_HOST: 0.0.0.0
+  AGENTIC_IAM_DASHBOARD_PORT: 8501
+  AGENTIC_IAM_ENABLE_TRUST_SCORING: "true"
+  AGENTIC_IAM_ENABLE_AUDIT_LOGGING: "true"
+  AGENTIC_IAM_ENABLE_MFA: "true"
+  AGENTIC_IAM_ENABLE_ANOMALY_DETECTION: "true"
+
+# Hooks for pre/post deployment
+hooks:
+  prepackage:
+    shell: pwsh
+    run: |
+      Write-Host "Preparing application for Azure deployment..."
+      if (-not (Test-Path "venv")) {
+        Write-Host "Installing dependencies..."
+        python -m venv venv
+        & .\venv\Scripts\Activate.ps1
+        pip install -r requirements.txt
+      }
+  postdeploy:
+    shell: pwsh
+    run: |
+      Write-Host "Deployment complete! Access your application:"
+      Write-Host "Dashboard: https://${{ env.AZURE_CONTAINER_APP_DOMAIN }}/dashboard"
+      Write-Host "API: https://${{ env.AZURE_CONTAINER_APP_DOMAIN }}/api"
