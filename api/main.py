@@ -83,31 +83,32 @@ async def lifespan(app: FastAPI):
  logger = get_logger("api")
  logger.info("Starting Agentic-IAM API server...")
 
- try:
- # Initialize settings
- settings_instance = Settings()
+	try:
+		# Initialize settings
+		settings_instance = Settings()
 
- # Setup logging
- setup_logging(
- log_level=settings_instance.log_level,
- log_file=settings_instance.log_file,
- enable_console=True
- )
+		# Setup logging
+		setup_logging(
+			log_level=settings_instance.log_level,
+			log_file=settings_instance.log_file,
+			enable_console=True
+		)
 
- # Initialize IAM system
- iam_instance = AgenticIAM(settings_instance)
- await iam_instance.initialize()
+		# Initialize IAM system
+		iam_instance = AgenticIAM(settings_instance)
+		await iam_instance.initialize()
 
- logger.info("API server started successfully")
+		logger.info("API server started successfully")
 
- yield
+		yield
 
- except Exception as e:
- logger.error(f"Failed to start API server: {str(e)}")
- raise
- finally:
- # Shutdown
- logger.info("Shutting down Agentic-IAM API server...")
+	except Exception as e:
+		logger.error(f"Failed to start API server: {str(e)}")
+		raise
+
+	finally:
+		# Shutdown
+		logger.info("Shutting down Agentic-IAM API server...")
 
  if iam_instance:
  await iam_instance.shutdown()
